@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Market Radar Engine</title>
+    <style>
+        :root {
+            --bg-color: #0b111e;
+            --card-bg: #141d30;
+            --accent-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --free-color: #64748b;
+            --premium-color: #22c55e;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 span {
+            color: var(--accent-color);
+        }
+        header p {
+            color: var(--text-muted);
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            letter-spacing: -0.03em;
+        }
+        
+        /* 4열 격자(Grid) 구조 */
+        .grid-4-columns {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 600px) {
+            .grid-4-columns { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .grid-4-columns { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .tile {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column; /* 내용물을 세로로 정렬하여 하단 표지가 맨 밑에 고정되도록 설정 */
+            justify-content: space-between;
+            min-height: 180px; /* 타일들의 높이를 균일하게 맞추기 위한 최소 높이 */
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tile:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+            cursor: pointer;
+        }
+        .badge {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-color);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            font-family: monospace;
+            align-self: flex-start;
+        }
+        .tile h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .tile p {
+            margin: 0 0 20px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* 🔥 [최종 추가] 타일 하단 유/무료 안내 사각형 및 화살표 스타일 */
+        .tile-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid rgba(30, 41, 59, 0.5);
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .indicator-free {
+            color: var(--free-color);
+        }
+        .indicator-premium {
+            color: var(--premium-color);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #141d30 0%, #0f172a 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+        .cta-section p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (min-width: 480px) {
+            .btn-container { flex-direction: row; }
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            max-width: 220px;
+            box-sizing: border-box;
+        }
+        .btn-free {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+        }
+        .btn-free:hover {
+            border-color: var(--text-main);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .btn-premium {
+            background-color: #22c55e;
+            color: #ffffff;
+            border: 2px solid #22c55e;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+        }
+        .btn-premium:hover {
+            background-color: #16a34a;
+            border-color: #16a34a;
+            transform: translateY(-1px);
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Market Radar <span>Signal Engine</span></h1>
+        <p>Real-time algorithmic trading signals delivered straight to your device.</p>
+    </header>
+
+    <!-- ======================================================================= -->
+    <!-- SECTION 1: SINGLE-INDICATOR TILES (4-Column Grid)                      -->
+    <!-- ======================================================================= -->
+    <div class="section-title">⚡ Single-Indicator Triggers</div>
+    <div class="grid-4-columns">
+        
+        <!-- 🆓 무료 타일 예시 1 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">RSI_Oversold_Daily</div>
+                <h3>RSI Oversold</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <!-- 사각형 유/무료 안내 및 화살표 -->
+            <div class="tile-footer indicator-free">
+                <span>[ FREE SIGNAL ]</span>
+                <span>GO FREE ➔</span>
+            </div>
+        </a>
+
+        <!-- 🆓 무료 타일 예시 2 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">Price_BB_DN_Daily</div>
+                <h3>BB Lower Break</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <div class="tile-footer indicator-free">
+                <span>[ FREE SIGNAL ]</span>
+                <span>GO FREE ➔</span>
+            </div>
+        </a>
+
+        <!-- 💎 유료 프리미엄 타일 예시 3 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">MA_GoldenCross_5_20</div>
+                <h3>Golden Cross 5/20</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <!-- 초록색 사각형 PREMIUM 안내 및 화살표 -->
+            <div class="tile-footer indicator-premium">
+                <span>[ PREMIUM ]</span>
+                <span>GO PREMIUM ➔</span>
+            </div>
+        </a>
+
+        <!-- 💎 유료 프리미엄 타일 예시 4 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">ADX_Trend_Start</div>
+                <h3>ADX Trend Breakout</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <div class="tile-footer indicator-premium">
+                <span>[ PREMIUM ]</span>
+                <span>GO PREMIUM ➔</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- SECTION 2: CONFLUENCE MATRIX TILES (_AND) (4-Column Grid)              -->
+    <!-- ======================================================================= -->
+    <div class="section-title">🔮 Confluence Matrix Engines (_AND)</div>
+    <div class="grid-4-columns">
+        
+        <!-- 💎 유료 프리미엄 타일 예시 5 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">Stoch_RSI_Bottom_2_AND</div>
+                <h3>Stoch RSI Double Bottom</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <div class="tile-footer indicator-premium">
+                <span>[ PREMIUM ]</span>
+                <span>GO PREMIUM ➔</span>
+            </div>
+        </a>
+
+        <!-- 💎 유료 프리미엄 타일 예시 6 -->
+        <a href="https://t.me" class="tile" target="_blank">
+            <div>
+                <div class="badge">Trend_Follow_Volume_2_AND</div>
+                <h3>Volume Trend Matrix</h3>
+                <p>Paste your custom english text here.</p>
+            </div>
+            <div class="tile-footer indicator-premium">
+                <span>[ PREMIUM ]</span>
+                <span>GO PREMIUM ➔</span>
+            </div>
+        </a>
+
+       
+    <!-- 🔥 [교정 핵심] 2중 조건 격자(Grid) 구조를 안전하게 닫아주는 태그입니다. -->
+    </div> 
+
+    <!-- ======================================================================= -->
+    <!-- CTA & TELEGRAM CONNECT SECTION (하단 결제 및 채널 이동 상자)              -->
+    <!-- ======================================================================= -->
+    <div class="cta-section">
+        <h2>Connect to Live Channels</h2>
+        <p>Choose your plan and receive real-time charts and signal notifications instantly.</p>
+        <div class="btn-container">
+            <a href="https://t.me" class="btn btn-free" target="_blank">Join Free Channel</a>
+            <a href="https://t.me" class="btn btn-premium" target="_blank">Access Premium Channel</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Market Radar Engine. All Rights Reserved. Powered by GitHub Pages.</p>
+    </footer>
+</div>
+
+</body>
+</html>
