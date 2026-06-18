@@ -55,23 +55,27 @@
         @media (min-width: 600px) {
             .grid-4-columns { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (min-width: 1024px) {
-            .grid-4-columns { grid-template-columns: repeat(4, 1fr); }
-        }
+       @media (min-width: 1024px) {
+    /* 데스크톱에서도 큼직하게 2열로 정렬합니다 */
+    .grid-4-columns { grid-template-columns: repeat(2, 1fr); } 
+}
 
         .tile {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column; /* 내용물을 세로로 정렬하여 하단 표지가 맨 밑에 고정되도록 설정 */
-            justify-content: space-between;
-            min-height: 180px; /* 타일들의 높이를 균일하게 맞추기 위한 최소 높이 */
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px; /* 타일이 커진 만큼 내부 여백도 24px로 넉넉하게 키웁니다 */
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: auto; /* ⚡ 글자 양에 따라 자동으로 늘어나도록 고정 높이를 해제합니다 */
+    height: 100%; /* ⚡ 같은 줄에 있는 타일끼리 가장 긴 글자 높이에 맞춰 키를 똑같이 정렬합니다 */
+    box-sizing: border-box;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
         .tile:hover {
             transform: translateY(-4px);
             border-color: var(--accent-color);
