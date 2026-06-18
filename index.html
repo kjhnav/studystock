@@ -3,7 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Market Radar Engine</title>
+    
+    <!-- ======================================================================= -->
+    <!-- 🔍 GOOGLE SEO MASTER SEARCH OPTIMIZATION (메타 태그 철벽 구축)         -->
+    <!-- ======================================================================= -->
+    <title>S&P 500 Algorithmic Trading Radar & Market Signal Engine</title>
+    
+    <!-- 1) 구글 검색 결과창에 노출될 매력적인 2줄 요약 설명문 -->
+    <meta name="description" content="Institutional-grade scanning engine monitoring every constituent within the S&P 500 daily. Access time-tested, universally recognized technical indicators and receive high-resolution charts via Telegram instantly.">
+    
+    <!-- 2) 글로벌 검색 로봇용 핵심 키워드 지정 (구글, 빙, 야후 타겟팅) -->
+    <meta name="keywords" content="S&P 500 Radar, Algorithmic Trading, Market Signals, Technical Indicators, Stock Scanner, Automated Trading Alerts, Bollinger Bands Breakout, RSI Oversold, Trading Telegram Bot, Quant Trading Engine">
+    <meta name="author" content="Algorithmic Trading Radar Engine">
+    
+    <!-- 3) 구글 로봇에게 이 페이지를 수집하라고 명령하는 색인 허가권 -->
+    <meta name="robots" content="index, follow">
+    
+    <!-- 4) 중복 URL 패널티 방지를 위한 표준 도메인 주소 고정 (대표님의 실제 깃허브 주소로 변경하세요) -->
+    <link rel="canonical" href="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/">
+
+    <!-- 5) 🔗 SNS(트위터, 페이스북, 링크드인) 공유 시 카드 뉴스로 이쁘게 뜨게 만드는 Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="S&P 500 Comprehensive Algorithmic Radar Engine">
+    <meta property="og:description" content="Daily institutional stock scanner screening 500+ assets with time-tested technical filters. Get live Telegram chart alerts instantly.">
+    <meta property="og:image" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/og_preview_image.png"> <!-- 카톡/SNS 공유시 뜰 대표 이미지 주소 -->
+    <meta property="og:url" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- 6) 🧠 구글 로봇이 사이트 구조를 0.001초만에 도표로 이해하게 만드는 랭킹 보너스 '구조화 데이터' -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "S&P 500 Algorithmic Trading Radar Engine",
+      "operatingSystem": "Web, Telegram",
+      "applicationCategory": "FinanceApplication",
+      "description": "An institutional-grade scanning engine monitoring every single constituent within the S&P 500 on a daily basis using time-tested technical indicators.",
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "USD",
+        "lowPrice": "0.00",
+        "offerCount": "2"
+      }
+    }
+    </script>
+    <!-- ======================================================================= -->
+
     <style>
         :root {
             --bg-color: #0b111e;
@@ -46,36 +91,34 @@
             letter-spacing: -0.03em;
         }
         
-        /* 4열 격자(Grid) 구조 */
+        /* 2열 격자(Grid) 구조 최적화 완료 */
         .grid-4-columns {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
         @media (min-width: 600px) {
-            .grid-4-columns { grid-template-columns: repeat(2, 1fr); }
+            .grid-4-columns { grid-template-columns: repeat(1, 1fr); }
         }
-       @media (min-width: 1024px) {
-    /* 데스크톱에서도 큼직하게 2열로 정렬합니다 */
-    .grid-4-columns { grid-template-columns: repeat(2, 1fr); } 
-}
+        @media (min-width: 1024px) {
+            .grid-4-columns { grid-template-columns: repeat(2, 1fr); } 
+        }
 
         .tile {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 24px; /* 타일이 커진 만큼 내부 여백도 24px로 넉넉하게 키웁니다 */
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: auto; /* ⚡ 글자 양에 따라 자동으로 늘어나도록 고정 높이를 해제합니다 */
-    height: 100%; /* ⚡ 같은 줄에 있는 타일끼리 가장 긴 글자 높이에 맞춰 키를 똑같이 정렬합니다 */
-    box-sizing: border-box;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: auto; 
+            height: 100%; 
+            box-sizing: border-box;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
         .tile:hover {
             transform: translateY(-4px);
             border-color: var(--accent-color);
@@ -106,8 +149,6 @@
             line-height: 1.5;
             flex-grow: 1;
         }
-
-        /* 🔥 [최종 추가] 타일 하단 유/무료 안내 사각형 및 화살표 스타일 */
         .tile-footer {
             display: flex;
             align-items: center;
@@ -118,12 +159,8 @@
             font-weight: 700;
             letter-spacing: 0.05em;
         }
-        .indicator-free {
-            color: var(--free-color);
-        }
-        .indicator-premium {
-            color: var(--premium-color);
-        }
+        .indicator-free { color: var(--free-color); }
+        .indicator-premium { color: var(--premium-color); }
 
         .cta-section {
             text-align: center;
@@ -189,6 +226,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <div class="container">
