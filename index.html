@@ -224,6 +224,120 @@
             color: var(--text-muted);
             font-size: 0.8rem;
         }
+
+        /* ==========================================================
+   Trading Alerts Educational Section (Theme Integrated)
+   ========================================================== */
+
+/* 전체 레이아웃 박스 */
+.alert-edu-section { 
+    max-width: 1200px; 
+    margin: 30px auto; 
+    color: var(--text-main); /* 기존 텍스트 메인 컬러 반영 */
+}
+
+/* 아코디언 스타일 */
+.edu-accordion {
+    background: var(--bg-color); /* 기존 전체 배경색 반영 */
+    border: 1px solid var(--border-color); /* 기존 보더 컬러 반영 */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* 아코디언 버튼 영역 */
+.edu-summary-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    background: var(--card-bg); /* 기존 카드 배경색 반영 */
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+/* 마우스를 올렸을 때의 효과 */
+.edu-summary-header:hover {
+    filter: brightness(1.2); /* 기존 카드 색상에서 살짝 밝아지도록 처리 */
+}
+
+.edu-summary-header::-webkit-details-marker { display: none; }
+.edu-summary-header { list-style: none; }
+
+.header-left { display: flex; align-items: center; flex: 1; }
+.accordion-icon { margin-right: 12px; font-size: 20px; }
+.header-text { font-size: 16px; font-weight: 600; color: var(--text-main); border-left: 3px solid var(--accent-color); padding-left: 12px; line-height: 1.4; }
+
+.header-right { display: flex; align-items: center; gap: 12px; }
+
+/* 안내 뱃지 스타일 */
+.click-badge {
+    font-size: 12px;
+    color: var(--accent-color); /* 기존 악센트 컬러 반영 */
+    background: rgba(56, 189, 248, 0.1); /* --accent-color에 맞춘 반투명 파란빛 배경 */
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.chevron { font-size: 12px; color: var(--text-muted); transition: transform 0.3s ease; }
+
+/* 열렸을 때 스타일 바꿈 */
+.edu-accordion[open] .edu-summary-header { border-bottom: 1px solid var(--border-color); }
+.edu-accordion[open] .chevron { transform: rotate(180deg); color: var(--accent-color); }
+.edu-accordion[open] .click-badge { color: var(--text-muted); background: rgba(255,255,255,0.05); }
+
+/* 본문 정렬 박스 */
+.edu-accordion-content { padding: 30px 24px; background: var(--bg-color); }
+
+/* 차트 이미지 2개를 가로(좌우)로 배치 */
+.alert-edu-charts { 
+    display: flex; 
+    gap: 24px; 
+    margin-bottom: 35px; 
+}
+
+/* 개별 차트 카드 디자인 (차트 원본 흰색 가독성 확보) */
+.chart-card { 
+    flex: 1; 
+    background: #ffffff; 
+    border: 1px solid #dddddd; 
+    border-radius: 8px; 
+    padding: 20px; 
+    text-align: center; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.chart-img { width: 100%; height: auto; border-radius: 4px; border: 1px solid #eeeeee; }
+.chart-caption { margin-top: 14px; font-size: 14px; color: #333333; line-height: 1.5; font-weight: 500; }
+
+.badge-success { background: var(--premium-color); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-right: 6px; vertical-align: middle;}
+.badge-warning { background: var(--free-color); color: #fff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-right: 6px; vertical-align: middle;}
+
+/* 텍스트 본문 영역 */
+.alert-edu-content-body { margin-top: 20px; }
+.edu-lead { font-size: 15px; line-height: 1.7; color: var(--text-main); margin-bottom: 18px; }
+.edu-lead code { background: var(--card-bg); padding: 2px 6px; border-radius: 4px; color: var(--accent-color); font-family: monospace; }
+
+.edu-list { list-style: none; padding: 0; margin: 25px 0; }
+.edu-list li { position: relative; padding-left: 24px; margin-bottom: 22px; font-size: 15px; line-height: 1.7; color: var(--text-muted); }
+.edu-list li::before { content: "•"; position: absolute; left: 4px; top: -2px; color: var(--accent-color); font-size: 22px; }
+.edu-list li strong { color: var(--text-main); font-size: 16px; display: inline-block; margin-bottom: 4px; }
+
+.edu-summary-box { background: rgba(56, 189, 248, 0.05); border: 1px dashed var(--accent-color); border-radius: 6px; padding: 22px; font-size: 15px; line-height: 1.7; color: var(--accent-color); margin-top: 35px; }
+
+/* 모바일 화면 최적화 */
+@media (max-width: 768px) {
+    .alert-edu-charts { flex-direction: column; gap: 16px; }
+    .edu-summary-header { padding: 15px 16px; }
+    .header-text { font-size: 14px; }
+    .click-badge { display: none; }
+}
+
+
+        
     </style>
 </head>
 
@@ -272,35 +386,40 @@
         </a>
     </div>
     <!-- START: Trading Alerts Educational Section (Accordion Mode) -->
+        <!-- START: Trading Alerts Educational Section (Optimized Layout) -->
     <div class="alert-edu-section">
         
-        <!-- 아코디언 감싸기 태그 (open을 넣으면 기본으로 열려있음, 빼면 닫혀있음) -->
         <details class="edu-accordion">
             
-            <!-- 아코디언 클릭하는 헤더 부분 -->
+            <!-- 클릭 버튼 영역: 직관성 강화 -->
             <summary class="edu-summary-header">
-                <span class="accordion-icon">💡</span> 
-                <span class="header-text">How to Smartly Navigate Trading Alerts: Finding Pearls and Avoiding Traps</span>
-                <span class="chevron">▼</span>
+                <div class="header-left">
+                    <span class="accordion-icon">💡</span> 
+                    <span class="header-text">How to Smartly Navigate Trading Alerts: Finding Pearls and Avoiding Traps</span>
+                </div>
+                <div class="header-right">
+                    <span class="click-badge">[ Click to Expand ]</span>
+                    <span class="chevron">▼</span>
+                </div>
             </summary>
 
             <!-- 아코디언 내부 콘텐츠 콘텐츠 영역 -->
             <div class="edu-accordion-content">
                 
-                <!-- 1. 차트 이미지 2개 배치 -->
+                <!-- 1. 차트 이미지 2개 배치 (CSS Flexbox를 통해 가로 배치 고정) -->
                 <div class="alert-edu-charts">
                     <div class="chart-card">
-                        <img src="path_to_pfg_chart.png" alt="PFG Chart Analysis" class="chart-img">
+                        <img src="./pfg_chart.png" alt="PFG Chart Analysis" class="chart-img">
                         <p class="chart-caption"><span class="badge-success">PFG Chart</span> A High-Confidence Signal in a Healthy Uptrend</p>
                     </div>
                     <div class="chart-card">
-                        <img src="path_to_ba_chart.png" alt="BA Chart Analysis" class="chart-img">
+                        <img src="./ba_chart.png" alt="BA Chart Analysis" class="chart-img">
                         <p class="chart-caption"><span class="badge-warning">BA Chart</span> A False Breakout or Short-Term Bounce in a Sideways Range</p>
                     </div>
                 </div>
 
                 <!-- 2. 영문 설명 본문 -->
-                <div class="alert-edu-content">
+                <div class="alert-edu-content-body">
                     <p class="edu-lead">In a stock market with thousands of tickers, algorithmic trading alerts are an invaluable compass. However, as shown in the two examples above, even if two stocks trigger the exact same mathematical alert—<strong><code>MA_GoldenCross_5_20</code></strong>—their actual market context and outlook can be completely opposite.</p>
                     
                     <p class="edu-lead">Here is how smart investors should utilize these automated alerts to maximize their success:</p>
@@ -333,6 +452,8 @@
         </details>
 
     </div>
+    <!-- END: Trading Alerts Educational Section -->
+
     <!-- END: Trading Alerts Educational Section -->
 
     
